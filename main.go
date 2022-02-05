@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/karthiksgd/sky_assessment/controller"
 	"github.com/karthiksgd/sky_assessment/rest"
 )
 
@@ -16,8 +17,11 @@ func main() {
 	rx := mux.NewRouter()
 
 	// Routes
-	rx.HandleFunc("/", rest.RestCalls).Methods("Post")
+	rx.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("view/assets"))))
+	rx.HandleFunc("/", controller.LoginController)
+	rx.HandleFunc("/api/adverts", rest.RestCalls).Methods("Post")
 
+	// Run Server
 	http.ListenAndServe(":8080", rx)
 
 }
