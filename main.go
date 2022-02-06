@@ -19,6 +19,11 @@ func main() {
 	// Routes
 	rx.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("view/assets"))))
 	rx.HandleFunc("/", controller.LoginController)
+	rx.HandleFunc("/logout", controller.LogoutController)
+	rx.HandleFunc("/signup", controller.SignupController)
+	rx.HandleFunc("/dashboard", controller.DashboardController)
+	rx.HandleFunc("/listcustomers", controller.AllCustomersController)
+
 	rx.HandleFunc("/api/adverts", rest.RestCalls).Methods("Post")
 
 	// Run Server

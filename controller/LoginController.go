@@ -58,6 +58,7 @@ func LoginController(w http.ResponseWriter, r *http.Request) {
 			// Create Session
 			if user.Utype == "admin" && user.Status == true {
 
+				session.Values["isLoggedin"] = true
 				session.Values["uId"] = user.Id
 				session.Values["uEmail"] = user.Email
 				session.Values["uType"] = user.Utype
@@ -69,7 +70,7 @@ func LoginController(w http.ResponseWriter, r *http.Request) {
 				}
 				fmt.Printf("%#v\n", session)
 
-				// http.Redirect(w, r, "/dashboard", 303)
+				http.Redirect(w, r, "/dashboard", 303)
 
 			}
 
@@ -81,6 +82,17 @@ func LoginController(w http.ResponseWriter, r *http.Request) {
 
 		}
 	}
+
+	tpl_admin.ExecuteTemplate(w, "login.gohtml", pg)
+}
+
+func LogoutController(w http.ResponseWriter, r *http.Request) {
+
+	session, _ := storeSession.Get(r, "sessionData")
+	session.Options.MaxAge = -1
+	session.Save(r, w)
+
+	pg := LoginPg{"Login | Sky Assessment", "You have logged out .."}
 
 	tpl_admin.ExecuteTemplate(w, "login.gohtml", pg)
 }

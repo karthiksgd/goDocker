@@ -2,6 +2,7 @@ package model
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	"github.com/karthiksgd/sky_assessment/autoload"
@@ -56,4 +57,31 @@ func GetUser(e, p *string) User {
 	}
 
 	return user
+}
+
+func AddUser(u *User) int64 {
+
+	stmt := fmt.Sprintf("INSERT INTO `users`(`email`, `fname`, `lname`, `type`, `status`, `uname`, `password`) VALUES ('%v','%v','%v','%v','%v','%v','%v');", u.Email, u.Fname, u.Lname, u.Utype, 0, u.Uname, u.Password)
+
+	query, err := db.Prepare(fmt.Sprintf("%v", stmt))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	stat, err := query.Exec()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	id, err := stat.LastInsertId()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return id
 }
