@@ -26,7 +26,7 @@ type CustUser struct {
 	Fname        string
 	Lname        string
 	Email        string
-	CustomerId   *big.Int
+	CustomerId   int64
 	Subscription int
 	Optin        int
 }
@@ -71,17 +71,15 @@ func AllCustomersModel() []CustUser {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Rows: %+v", rows)
-
-	var customer CustUser
-	var customers []CustUser
+	var cust = CustUser{}
+	var custs = []CustUser{}
 
 	for rows.Next() {
 
-		rows.Scan("", "", &customer.CustomerId, &customer.Subscription, &customer.Optin, "", &customer.Email, &customer.Fname, &customer.Lname, "", "", "", "")
-		fmt.Println("Customer ", customer)
-		customers = append(customers, customer)
+		rows.Scan(&cust.Id, &cust.UserId, &cust.CustomerId, &cust.Subscription, &cust.Optin, &cust.Id, &cust.Email, &cust.Fname, &cust.Lname, "", "", "", "")
+		fmt.Println("Customer ", cust)
+		custs = append(custs, cust)
 	}
 
-	return customers
+	return custs
 }

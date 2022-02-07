@@ -87,10 +87,9 @@ func AllCustomersController(w http.ResponseWriter, r *http.Request) {
 
 	customers := model.AllCustomersModel()
 
-	fmt.Println(customers)
-
 	pg := SignupPg{"All Customers | Sky Assessment", "", customers}
-	fmt.Println(pg)
+
+	fmt.Printf("%+v", pg)
 
 	tpl_admin.ExecuteTemplate(w, "listcustomers.gohtml", pg)
 }

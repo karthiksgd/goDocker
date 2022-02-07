@@ -20,14 +20,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Events Page</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Customers</h1>
 
 
                     <!-- Begin container List Events -->
 
                      <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">List Customers</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -54,14 +54,26 @@
                                     </tfoot>
                                     <tbody>
                                     
-                                    {{if .Events}}
-                                        {{range .Events}}
+                                    {{if .Customers}}
+                                        {{range .Customers}}
                                         <tr>
-                                            <td>{{.EventName}}</td>
-                                            <td>{{.EventVenue}}</td>
-                                            <td>{{.EventAddress}}</td>
-                                            <td>{{.EventCap}}</td>
-                                            <td>{{.EventDate}} At {{.EventTime}}</td>
+                                            <td>{{.Fname}} {{.Lname}}</td>
+                                            <td>{{.Email}}</td>
+
+                                            {{if eq .Subscription 1}}
+                                            <td>Active</td>
+                                            {{else}}
+                                            <td>Inactive</td>
+                                            {{end}}
+
+                                            <td>{{.CustomerId}}</td>
+                                            
+                                            {{if eq .Optin 1}}
+                                            <td>Yes</td>
+                                            {{else}}
+                                            <td>No</td>
+                                            {{end}}
+
                                             <td>
                                                 <button type="button" class="btn btn-primary btn-sm">View</button>
                                                 <button type="button" class="btn btn-secondary btn-sm">Edit</button>

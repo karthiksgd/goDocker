@@ -17,7 +17,19 @@ type SkyData struct {
 	Message  string `json:"message"`
 }
 
-func RestCalls(w http.ResponseWriter, r *http.Request) {
+func GetCustomers(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("content-type", "application/json")
+
+	customers := GetCustomerData()
+
+	fmt.Println(customers)
+
+	json.NewEncoder(w).Encode(customers)
+
+}
+
+func CustomerData(w http.ResponseWriter, r *http.Request) {
 
 	defaultTimer := 2
 
@@ -38,8 +50,6 @@ func RestCalls(w http.ResponseWriter, r *http.Request) {
 	} else {
 
 		// json.NewEncoder(w).Encode(custData)
-
-		fmt.Println("Customer Data before loop : ", custData)
 
 		if custData.OptIn == false {
 

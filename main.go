@@ -24,7 +24,8 @@ func main() {
 	rx.HandleFunc("/dashboard", controller.DashboardController)
 	rx.HandleFunc("/listcustomers", controller.AllCustomersController)
 
-	rx.HandleFunc("/api/adverts", rest.RestCalls).Methods("Post")
+	rx.HandleFunc("/api/customers", rest.GetCustomers).Methods("Get")
+	rx.HandleFunc("/api/custdata", rest.CustomerData).Methods("Post")
 
 	// Run Server
 	http.ListenAndServe(":8080", rx)
