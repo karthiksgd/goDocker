@@ -29,62 +29,64 @@ func GetCustomers(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func CustomerData(w http.ResponseWriter, r *http.Request) {
+func CustomerData(c CustData) SkyData {
 
 	defaultTimer := 2
 
-	w.Header().Set("content-type", "application/json")
+	// var custData CustData
 
-	var custData CustData
-	json.NewDecoder(r.Body).Decode(&custData)
+	var responseData SkyData
+	// json.NewDecoder(r.Body).Decode(&custData)
 
-	data, valid := sanitizeData(custData)
+	data, valid := sanitizeData(c)
 
 	fmt.Println("Sanitized Data : ", data, " ", valid)
 
 	if valid == false {
 
-		sanitData := data
-		json.NewEncoder(w).Encode(sanitData)
+		responseData = data
+
+		// json.NewEncoder(w).Encode(sanitData)
 
 	} else {
 
 		// json.NewEncoder(w).Encode(custData)
 
-		if custData.OptIn == false {
+		if c.OptIn == false {
 
-			responseData := SkyData{false, "No Permission"}
+			responseData = SkyData{false, "No Permission"}
 
-			json.NewEncoder(w).Encode(responseData)
+			// json.NewEncoder(w).Encode(responseData)
 
-		} else if custData.InactivityTimer >= (defaultTimer * 60 * 60) {
+		} else if c.InactivityTimer >= (defaultTimer * 60 * 60) {
 
-			responseData := SkyData{false, "Session Timeout"}
+			responseData = SkyData{false, "Session Timeout"}
 
-			json.NewEncoder(w).Encode(responseData)
+			// json.NewEncoder(w).Encode(responseData)
 
-		} else if custData.CustomerId%7 == 0 {
+		} else if c.CustomerId%7 == 0 {
 
-			fmt.Println("Customer Data divisible by 7: ", custData)
+			fmt.Println("Customer Data divisible by 7: ", c)
 
-			responseData := SkyData{false, "Linear Advert is targeted"}
+			responseData = SkyData{false, "Linear Advert is targeted"}
 
-			json.NewEncoder(w).Encode(responseData)
+			// json.NewEncoder(w).Encode(responseData)
 
-		} else if custData.InactivityTimer%9 == 0 {
+		} else if c.InactivityTimer%9 == 0 {
 
-			responseData := SkyData{false, "System is Offline"}
+			responseData = SkyData{false, "System is Offline"}
 
-			json.NewEncoder(w).Encode(responseData)
+			// json.NewEncoder(w).Encode(responseData)
 
 		} else {
 
-			responseData := SkyData{true, "All Good"}
+			responseData = SkyData{true, "All Good"}
 
-			json.NewEncoder(w).Encode(responseData)
+			// json.NewEncoder(w).Encode(responseData)
 		}
 
 	}
+	return responseData
 
 }
 
@@ -93,6 +95,8 @@ func sanitizeData(data CustData) (SkyData, bool) {
 	var digits int
 	var returnData SkyData
 	var isValidated bool
+
+	fmt.Println("Test Data", data)
 
 	for data.CustomerId != 0 {
 		data.CustomerId /= 10
@@ -105,6 +109,11 @@ func sanitizeData(data CustData) (SkyData, bool) {
 		isValidated = false
 		fmt.Println(digits)
 
+	} else if data.OptIn == false {
+
+		returnData = SkyData{false, "Customer hasn't Opted In"}
+		isValidated = false
+
 	} else {
 
 		returnData = SkyData{}
@@ -112,5 +121,21 @@ func sanitizeData(data CustData) (SkyData, bool) {
 	}
 
 	return returnData, isValidated
+
+}
+
+func CheckCustomer(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("content-type", "application/json")
+
+	var customer CustData
+
+	json.NewDecoder(r.Body).Decode(&customer)
+
+	responseData := CustomerData(customer)
+
+	json.NewEncoder(w).Encode(responseData)
+
+	// fmt.Println(responseData)
 
 }

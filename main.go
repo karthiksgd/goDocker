@@ -25,7 +25,8 @@ func main() {
 	rx.HandleFunc("/listcustomers", controller.AllCustomersController)
 
 	rx.HandleFunc("/api/customers", rest.GetCustomers).Methods("Get")
-	rx.HandleFunc("/api/custdata", rest.CustomerData).Methods("Post")
+	// rx.HandleFunc("/api/custdata", rest.CustomerData).Methods("Post")
+	rx.HandleFunc("/api/checkcustomer", rest.CheckCustomer).Methods("Post")
 
 	// Run Server
 	http.ListenAndServe(":8080", rx)
