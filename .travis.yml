@@ -9,5 +9,5 @@ before_install:
 
 
 script: 
-  - docker run -e CI=true go-sky-app-test go test -- --coverage
-  - docker run -e CI=true go-sky-rest-test go test -- --coverage
+  - go test go-sky-app-test
+  - go test go-sky-rest-test
