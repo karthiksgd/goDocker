@@ -5,11 +5,10 @@ services:
   - docker
 
 before_install: 
-  - docker build -t app-test -f ./application/Dockerfile.dev ./application
-  - docker build -t rest-test -f ./rest/Dockerfile.dev ./rest
-  # - sudo apt-get install -qq sshpass
+  - docker build -t karthiksgd/app-test -f ./application/Dockerfile.dev ./application
+  - docker build -t karthiksgd/rest-test -f ./rest/Dockerfile.dev ./rest
 
 
 script: 
-  - go test -v ./application
-  - go test -v ./rest
+  - go test -v ./application/...
+  - go test -v ./rest/...
