@@ -10,4 +10,5 @@ before_install:
 
 
 script: 
-  - go test -v ./...
+  - go test -v ./application
+  - go test -v ./rest
