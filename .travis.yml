@@ -5,11 +5,13 @@ services:
   - docker
 
 before_install: 
+  -  docker run -e CI=true app-test -f ./application/Dockerfile.dev ./application
+  -  docker run -e CI=true api-test -f ./rest/Dockerfile.dev ./rest
   # - docker build -t app-test -f ./application/Dockerfile.dev ./application
   # - docker build -t rest-test -f ./rest/Dockerfile.dev ./rest
-  - sudo apt-get install -qq sshpass
+  # - sudo apt-get install -qq sshpass
 
-# Test scrpt again - updated Git Token
+
 script: 
   - go test -v ./application
-  # - go test -v ./rest
+  - go test -v ./rest
