@@ -10,9 +10,7 @@ RUN go mod download
 
 COPY ./ ./
 
-# Install the package and create test binary
-RUN go install -v ./... && \
-    CGO_ENABLED=0 GOOS=linux go test -c
+RUN go build -o /sky-app
 
 EXPOSE 8080
 
