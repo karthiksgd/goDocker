@@ -8,7 +8,7 @@ before_install:
   - docker build -t app-test -f ./application/Dockerfile.dev ./application
   - docker build -t rest-test -f ./rest/Dockerfile.dev ./rest
 
-
+# Test scrpt again
 script: 
   - go test -v ./application
   - go test -v ./rest
