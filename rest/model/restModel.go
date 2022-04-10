@@ -1,10 +1,10 @@
-package rest
+package model
 
 import (
 	"database/sql"
 	"log"
 
-	"github.com/karthiksgd/sky_assessment/autoload"
+	"github.com/karthiksgd/docker-rest-go/autoload"
 )
 
 var db *sql.DB

@@ -1,9 +1,11 @@
-package rest
+package controller
 
 import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/karthiksgd/docker-rest-go/model"
 )
 
 type CustData struct {
@@ -21,7 +23,7 @@ func GetCustomers(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("content-type", "application/json")
 
-	customers := GetCustomerData()
+	customers := model.GetCustomerData()
 
 	fmt.Println(customers)
 

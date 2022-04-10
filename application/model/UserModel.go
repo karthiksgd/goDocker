@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/karthiksgd/sky_assessment/autoload"
+	"github.com/karthiksgd/docker-app-go/autoload"
 )
 
 var db *sql.DB

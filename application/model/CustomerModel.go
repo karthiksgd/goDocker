@@ -5,7 +5,7 @@ import (
 	"log"
 	"math/big"
 
-	"github.com/karthiksgd/sky_assessment/autoload"
+	"github.com/karthiksgd/docker-app-go/autoload"
 )
 
 func init() {

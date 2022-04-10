@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/sessions"
-	"github.com/karthiksgd/sky_assessment/model"
+	"github.com/karthiksgd/docker-app-go/model"
 )
 
 var tpl_admin *template.Template

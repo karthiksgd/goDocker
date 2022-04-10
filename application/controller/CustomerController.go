@@ -7,7 +7,7 @@ import (
 	"math/big"
 	"net/http"
 
-	"github.com/karthiksgd/sky_assessment/model"
+	"github.com/karthiksgd/docker-app-go/model"
 )
 
 type SignupPg struct {

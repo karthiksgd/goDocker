@@ -1,4 +1,4 @@
-module github.com/karthiksgd/sky_assessment
+module github.com/karthiksgd/docker-app-go
 
 go 1.16
 

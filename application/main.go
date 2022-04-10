@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/karthiksgd/sky_assessment/controller"
-	"github.com/karthiksgd/sky_assessment/rest"
+	"github.com/karthiksgd/docker-app-go/controller"
+	// "github.com/karthiksgd/sky_assessment/rest"
 )
 
 func main() {
@@ -24,9 +24,9 @@ func main() {
 	rx.HandleFunc("/dashboard", controller.DashboardController)
 	rx.HandleFunc("/listcustomers", controller.AllCustomersController)
 
-	rx.HandleFunc("/api/customers", rest.GetCustomers).Methods("Get")
+	// rx.HandleFunc("/api/customers", rest.GetCustomers).Methods("Get")
 	// rx.HandleFunc("/api/custdata", rest.CustomerData).Methods("Post")
-	rx.HandleFunc("/api/checkcustomer", rest.CheckCustomer).Methods("Post")
+	// rx.HandleFunc("/api/checkcustomer", rest.CheckCustomer).Methods("Post")
 
 	// Run Server
 	http.ListenAndServe(":8080", rx)

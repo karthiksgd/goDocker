@@ -9,7 +9,7 @@ import (
 
 func DbConn() *sql.DB {
 
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:8889)/sky_assess")
+	db, err := sql.Open("mysql", "root:root@tcp(godockerDB)/sky_assess")
 	if err != nil {
 		log.Fatal(err)
 	}

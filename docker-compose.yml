@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  sky-mysql:
+    image: mysql
+    container_name: godockerDB
+    volumes:
+        - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sky_assess
+    ports:
+      - "3306:3306"
+  
+  nginx:
+    restart: always
+    depends_on:
+      - sky-app
+      - sky-api
+    build: ./nginx
+    ports:
+      - "3050:80"
+
+  sky-app:
+    restart: always
+    build: ./application
+    ports:
+      - "8080:8080"
+  sky-api:
+    restart: always
+    build: ./rest
+    ports:
+      - "8081:8081"
