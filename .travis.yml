@@ -1,0 +1,13 @@
+sudo: required
+
+services:
+  - docker
+
+before_install: 
+  - docker build -t karthiksgd/go-sky-app-test -f ./application/Dockerfile.dev
+  - docker build -t karthiksgd/go-sky-rest-test -f ./rest/Dockerfile.dev
+
+
+script: 
+  - docker run -e CI=true go-sky-app-test go test -- --coverage
+  - docker run -e CI=true go-sky-rest-test go test -- --coverage
