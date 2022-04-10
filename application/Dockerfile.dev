@@ -14,5 +14,6 @@ RUN go build -o /sky-app
 
 EXPOSE 8080
 
-CMD [ "/sky-app" ]
+# CMD [ "/sky-app" ]
+CMD CGO_ENABLED=0 go test ./...
 
