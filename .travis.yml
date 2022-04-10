@@ -9,5 +9,5 @@ before_install:
 
 
 script: 
-  - go test go-sky-app-test
-  - go test go-sky-rest-test
+  - go test -v ./application/go-sky-app-test
+  - go test -v ./rest/go-sky-rest-test
