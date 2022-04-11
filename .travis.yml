@@ -1,6 +1,6 @@
 sudo: required
 language: go
-github_token: $GITHUB_TOKEN
+# github_token: $GITHUB_TOKEN
 
 services:
   - docker
