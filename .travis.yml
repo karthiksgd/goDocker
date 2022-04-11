@@ -1,7 +1,7 @@
 sudo: required
 language: go
 go:
-  - 1.x
+  - 1.7.x
 
 services:
   - docker
