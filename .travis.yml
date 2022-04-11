@@ -12,6 +12,6 @@ before_install:
   - docker build -t karthiksgd/rest-test -f ./rest/Dockerfile.dev ./rest
 
 script:
-  - docker run karthiksgd/app-test -- --coverage
-  - docker run karthiksgd/rest-test -- --coverage
+  - docker run karthiksgd/app-test go test ./... -- --coverage
+  - docker run karthiksgd/rest-test go test ./... -- --coverage
  
