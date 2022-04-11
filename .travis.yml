@@ -3,7 +3,6 @@ language: go
 go:
   - 1.x
 
-
 services:
   - docker
 
@@ -12,8 +11,7 @@ before_install:
   - docker build -t karthiksgd/app-test -f ./application/Dockerfile.dev ./application
   - docker build -t karthiksgd/rest-test -f ./rest/Dockerfile.dev ./rest
 
-
 script:
-  - docker run karthiksgd/app-test
-  - docker run karthiksgd/rest-test
+  - docker run karthiksgd/app-test -- --coverage
+  - docker run karthiksgd/rest-test -- --coverage
  
