@@ -19,5 +19,5 @@ RUN go build -o /sky-api
 EXPOSE 8080
 
 # CMD [ "/sky-api" ]
-CMD CGO_ENABLED=0 go test ./...
+CMD go test ./...
 
