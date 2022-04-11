@@ -1,17 +1,21 @@
 sudo: required
 language: go
+go:
+  - 1.x
 # github_token: $GITHUB_TOKEN
 
 services:
   - docker
 
 before_install:
-  - sudo apt-get install build-essential
-  - docker build -t karthiksgd/app-test -f ./application/Dockerfile.dev ./application
-  - docker build -t karthiksgd/rest-test -f ./rest/Dockerfile.dev ./rest
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.24.0
+  # - sudo apt-get install build-essential
+  # - docker build -t karthiksgd/app-test -f ./application/Dockerfile.dev ./application
+  # - docker build -t karthiksgd/rest-test -f ./rest/Dockerfile.dev ./rest
 
 
 script: 
   # - go test -v ./application/...
   # - go test -v ./rest/...
-  - go test -v ./...
+  # - go test -v ./...
+  - make lint test
