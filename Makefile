@@ -9,7 +9,8 @@ LINTER=golangci-lint
 all: test build
 
 test:
-      $(GOTEST) ./... -v
+      $(GOTEST) ./application/ -v
+	  
 
 build:
       $(GOBUILD) -o $(BINARY_NAME) -v
