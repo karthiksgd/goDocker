@@ -4,7 +4,8 @@ language: go
 services:
   - docker
 
-before_install: 
+before_install:
+  - sudo apt-get install build-essential
   - docker build -t karthiksgd/app-test -f ./application/Dockerfile.dev ./application
   - docker build -t karthiksgd/rest-test -f ./rest/Dockerfile.dev ./rest
 
